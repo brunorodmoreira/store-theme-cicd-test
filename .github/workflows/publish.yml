@@ -26,5 +26,5 @@ jobs:
       - name: VTEX Publish
         run: vtex publish -y | echo 'App Published'
 
-      - name: VTEX deploy
+      - name: VTEX Deploy
         run: vtex deploy -f -y | echo 'App Deployed'
