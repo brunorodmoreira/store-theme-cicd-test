@@ -23,8 +23,8 @@ jobs:
       - name: Create VTEX Session
         run: create-session --account ${{ secrets.VTEX_ACCOUNT }} --appkey ${{ secrets.VTEX_APP_KEY }} --apptoken ${{ secrets.VTEX_APP_TOKEN }}
 
-      - name: VTEX Publish
-        run: vtex publish -y | echo 'App Published'
+      - name: vtex publish
+        run: vtex publish -y
 
-      - name: VTEX Deploy
-        run: vtex deploy -f -y | echo 'App Deployed'
+      - name: vtex deploy
+        run: vtex deploy -f -y
