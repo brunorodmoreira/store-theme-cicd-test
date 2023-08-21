@@ -23,8 +23,20 @@ jobs:
       - name: Create VTEX Session
         run: create-session --account ${{ secrets.VTEX_ACCOUNT }} --appkey ${{ secrets.VTEX_APP_KEY }} --apptoken ${{ secrets.VTEX_APP_TOKEN }}
 
-      - name: vtex publish
-        run: vtex publish -y
+      - name: Prompt for release type
+        id: prompt
+        run: |
+          options=("major" "minor" "patch")
+          PS3="Select release type: "
+          select opt in "${options[@]}"; do
+              echo "::set-output name=release_type::$opt"
+              break
+          done
+
+      - name: vtex release
+        env:
+          RELEASE_TYPE: ${{ steps.prompt.outputs.release_type }}
+        run: yes Y | vtex release $RELEASE_TYPE
 
       - name: vtex deploy
         run: yes Y | vtex deploy -f
