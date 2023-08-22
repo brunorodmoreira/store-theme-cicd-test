@@ -20,7 +20,6 @@ jobs:
       VTEX_ACCOUNT: ${{ secrets.VTEX_ACCOUNT }}
       VTEX_APP_KEY: ${{ secrets.VTEX_APP_KEY }}
       VTEX_APP_TOKEN: ${{ secrets.VTEX_APP_TOKEN }}
-      RELEASE_TYPE: ${{ github.event.inputs.release-type }}
 
     steps:
       - name: Checkout code
@@ -29,8 +28,8 @@ jobs:
       - name: Create VTEX Session
         run: create-session --account $VTEX_ACCOUNT --appkey $VTEX_APP_KEY --apptoken $VTEX_APP_TOKEN
 
-      - name: vtex release
-        run: yes Y | vtex release $RELEASE_TYPE
+      - name: vtex publish
+        run: vtex publish -y
 
       - name: vtex deploy
         run: yes Y | vtex deploy -f
