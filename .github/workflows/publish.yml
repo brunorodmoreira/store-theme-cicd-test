@@ -16,6 +16,13 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ github.token }}
 
+    inputs:
+      release-type:
+        description: 'The type of release to perform (major, minor, or patch)'
+        required: true
+        default: 'minor'
+        # You can add other validation rules here, such as regex patterns or allowed values.
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -24,7 +31,7 @@ jobs:
         run: create-session --account ${{ secrets.VTEX_ACCOUNT }} --appkey ${{ secrets.VTEX_APP_KEY }} --apptoken ${{ secrets.VTEX_APP_TOKEN }}
 
       - name: vtex release
-        run: yes Y | vtex release minor
+        run: yes Y | vtex release ${{ inputs.release-type }}
 
       - name: vtex deploy
         run: yes Y | vtex deploy -f
