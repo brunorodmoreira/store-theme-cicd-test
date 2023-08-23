@@ -1,7 +1,7 @@
 {
   "vendor": "brunomoreira",
   "name": "store-theme",
-  "version": "5.6.0",
+  "version": "5.7.0",
   "builders": {
     "styles": "2.x",
     "store": "0.x",
